@@ -13,6 +13,7 @@
 		4A3927411B67B5D000AC0F2A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3927401B67B5D000AC0F2A /* Images.xcassets */; };
 		4A3927441B67B5D000AC0F2A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A3927421B67B5D000AC0F2A /* LaunchScreen.xib */; };
 		4A3927501B67B5D000AC0F2A /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A39274F1B67B5D000AC0F2A /* CalculatorTests.swift */; };
+		4A39275C1B6BCB7D00AC0F2A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A39275B1B6BCB7D00AC0F2A /* CalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4A3927491B67B5D000AC0F2A /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A39274E1B67B5D000AC0F2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A39274F1B67B5D000AC0F2A /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		4A39275B1B6BCB7D00AC0F2A /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		4A3927361B67B5D000AC0F2A /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				4A39275B1B6BCB7D00AC0F2A /* CalculatorBrain.swift */,
 				4A3927391B67B5D000AC0F2A /* AppDelegate.swift */,
 				4A39273B1B67B5D000AC0F2A /* ViewController.swift */,
 				4A39273D1B67B5D000AC0F2A /* Main.storyboard */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A39273C1B67B5D000AC0F2A /* ViewController.swift in Sources */,
+				4A39275C1B6BCB7D00AC0F2A /* CalculatorBrain.swift in Sources */,
 				4A39273A1B67B5D000AC0F2A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
