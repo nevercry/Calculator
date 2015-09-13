@@ -66,7 +66,7 @@ class CalculatorBrain {
         learnOp(Op.UnaryOperation("sin", sin, nil))
         learnOp(Op.UnaryOperation("cos", cos, nil))
         learnOp(Op.UnaryOperation("±", { -$0 }, nil))
-        learnOp(Op.NullaryOperation("π", { M_PI}))
+        learnOp(Op.NullaryOperation("π", { M_PI }))
     }
     
     typealias PropertyList = AnyObject

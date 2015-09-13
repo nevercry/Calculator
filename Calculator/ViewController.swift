@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     
     var brain = CalculatorBrain()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        display.text = " "
+    }
+    
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         history.text = history.text! + digit
@@ -26,7 +31,18 @@ class ViewController: UIViewController {
             if (digit == "." && display.text!.rangeOfString(".") != nil) {
                 return
             }
-            display.text = display.text! + digit
+            if (digit == "0") && ((display.text == "0") || (display.text == "-0")) {
+                return
+            }
+            if (digit != ".") && ((display.text == "0") || (display.text == "-0")) {
+                if (display.text == "0") {
+                    display.text = digit
+                } else {
+                    display.text = "-" + digit
+                }
+            } else {
+                display.text = display.text! + digit
+            }
         } else {
             if (digit == ".") {
                 display.text = "0."
@@ -34,48 +50,93 @@ class ViewController: UIViewController {
                 display.text = digit
             }
             userIsInTheMiddleOfTypingANumber = true
+            history.text = brain.description != "?" ? brain.description : ""
         }
     }
     
     @IBAction func operate(sender: UIButton) {
-        if userIsInTheMiddleOfTypingANumber {
-            enter()
-        }
         if let operation = sender.currentTitle {
+            if userIsInTheMiddleOfTypingANumber {
+                if operation == "±" {
+                    let displayText = display.text!
+                    if (displayText.rangeOfString("-") != nil) {
+                        display.text = dropFirst(displayText)
+                    } else {
+                        display.text = "-" + displayText
+                    }
+                    return
+                }
+                enter()
+            }
             if let result = brain.performOperation(operation) {
                 displayValue = result
             } else {
-                displayValue = 0
+                // error?
+                displayValue = nil
             }
         }
     }
     
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
-        if let result = brain.pushOperand(displayValue!) {
-            displayValue = result
-        } else {
-            displayValue = 0
+        if displayValue != nil {
+            if let result = brain.pushOperand(displayValue!) {
+                displayValue = result
+            } else {
+                // error?
+                displayValue = nil
+            }
         }
-        history.text = history.text! + " "
     }
     
     @IBAction func clear(sender: UIButton) {
-        userIsInTheMiddleOfTypingANumber = false
+        brain = CalculatorBrain()
         history.text = ""
-        display.text = "0"
+        displayValue = nil
+    }
+    
+    @IBAction func backSpace() {
+        if userIsInTheMiddleOfTypingANumber {
+            let displayText = display.text!
+            if count(displayText) > 1 {
+                display.text = dropLast(displayText)
+                if (count(displayText) == 2) && (display.text?.rangeOfString("-") != nil) {
+                    display.text = "-0"
+                }
+            } else {
+                display.text = "0"
+            }
+        }
+    }
+    
+    @IBAction func storeVariable(sender: UIButton) {
+        if let variable = last(sender.currentTitle!) {
+            if displayValue != nil {
+                brain.variableValues["\(variable)"] = displayValue
+                if let result = brain.evaluate() {
+                    displayValue = result
+                } else {
+                    displayValue = nil
+                }
+            }
+        }
+        userIsInTheMiddleOfTypingANumber = false
+    }
+    
+    @IBAction func pushVariable(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            enter()
+        }
+        if let result = brain.pushOperand(sender.currentTitle!) {
+            displayValue = result
+        } else {
+            displayValue = nil
+        }
     }
     
     var displayValue: Double? {
         get {
-            if let displayText = display.text {
-                let numberFormatter = NSNumberFormatter()
-                numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
-                if let displayNumber = numberFormatter.numberFromString(displayText) {
-                    return displayNumber.doubleValue
-                }
-            }
-            return nil
+            return NSNumberFormatter().numberFromString(display.text!)?.doubleValue
         }
         set {
             if (newValue != nil) {
@@ -87,6 +148,7 @@ class ViewController: UIViewController {
                 display.text = "0"
             }
             userIsInTheMiddleOfTypingANumber = false
+            history.text = brain.description + "="
         }
     }
 }
