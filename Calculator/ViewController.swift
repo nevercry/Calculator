@@ -60,7 +60,7 @@ class ViewController: UIViewController {
                 if operation == "±" {
                     let displayText = display.text!
                     if (displayText.rangeOfString("-") != nil) {
-                        display.text = dropFirst(displayText)
+                        display.text = String(displayText.characters.dropFirst())
                     } else {
                         display.text = "-" + displayText
                     }
@@ -98,9 +98,9 @@ class ViewController: UIViewController {
     @IBAction func backSpace() {
         if userIsInTheMiddleOfTypingANumber {
             let displayText = display.text!
-            if count(displayText) > 1 {
-                display.text = dropLast(displayText)
-                if (count(displayText) == 2) && (display.text?.rangeOfString("-") != nil) {
+            if displayText.characters.count > 1 {
+                display.text = String(displayText.characters.dropLast())
+                if (displayText.characters.count == 2) && (display.text?.rangeOfString("-") != nil) {
                     display.text = "-0"
                 }
             } else {
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func storeVariable(sender: UIButton) {
-        if let variable = last(sender.currentTitle!) {
+        if let variable = (sender.currentTitle!).characters.last {
             if displayValue != nil {
                 brain.variableValues["\(variable)"] = displayValue
                 if let result = brain.evaluate() {
