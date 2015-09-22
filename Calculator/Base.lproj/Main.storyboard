@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mAX-bV-bGa">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -526,7 +525,15 @@
                             <constraint firstItem="Q0k-fG-ujQ" firstAttribute="top" secondItem="yH1-bJ-5Gz" secondAttribute="top" id="lPR-ho-bQo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Graph" id="lcg-ld-WOL"/>
+                    <navigationItem key="navigationItem" title="Graph" id="lcg-ld-WOL">
+                        <barButtonItem key="rightBarButtonItem" title="Statistics" id="Vfx-cx-ZzB">
+                            <connections>
+                                <segue destination="RPE-Mn-U6Q" kind="popoverPresentation" identifier="Show Statistics" popoverAnchorBarButtonItem="Vfx-cx-ZzB" id="Or9-oe-uiK">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="grapView" destination="Q0k-fG-ujQ" id="FOP-rG-hgA"/>
                     </connections>
@@ -534,6 +541,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YzV-XY-6mv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1966" y="395"/>
+        </scene>
+        <!--Statistics View Controller-->
+        <scene sceneID="7Z9-gu-Vmv">
+            <objects>
+                <viewController id="RPE-Mn-U6Q" customClass="StatisticsViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tOi-uO-nE8"/>
+                        <viewControllerLayoutGuide type="bottom" id="nLL-VE-UT5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RJ5-ji-6GL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t2G-dm-Ak1">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="t2G-dm-Ak1" firstAttribute="leading" secondItem="RJ5-ji-6GL" secondAttribute="leading" id="9el-V6-wPf"/>
+                            <constraint firstItem="t2G-dm-Ak1" firstAttribute="top" secondItem="RJ5-ji-6GL" secondAttribute="top" id="QCl-FZ-khh"/>
+                            <constraint firstAttribute="trailing" secondItem="t2G-dm-Ak1" secondAttribute="trailing" id="dT2-Rz-UD3"/>
+                            <constraint firstItem="t2G-dm-Ak1" firstAttribute="bottom" secondItem="nLL-VE-UT5" secondAttribute="top" id="sVS-o2-Wh8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="t2G-dm-Ak1" id="Jue-bo-yXL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mdf-c9-PqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2736" y="395"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3dz-Oe-yga">

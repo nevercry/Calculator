@@ -143,12 +143,24 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIPopoverPrese
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let identifier = segue.identifier {
-//            switch identifier {
-//            case Keys.SegueIdentifier:
-//                if let tvc = segue.destinationViewController as? S
-//            }
-//        }
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Keys.SegueIdentifier:
+                if let tvc = segue.destinationViewController as? StatisticsViewController {
+                    if let ppc = tvc.popoverPresentationController {
+                        ppc.delegate = self
+                    }
+                    finishStatistics()
+                    var texts = [String]()
+                    for (key, value) in statistics {
+                        texts += ["\(key) = \(value)"]
+                    }
+                    tvc.text = texts.count > 0 ? texts.joinWithSeparator("\n") : "none"
+                }
+            default:
+                break
+            }
+        }
     }
     
     @available(iOS 8.0, *)
